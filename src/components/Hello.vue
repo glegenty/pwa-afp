@@ -1,5 +1,6 @@
 <template>
   <div class="signUp">
+    <h1>Sign Up</h1>
     <input v-model="name" class="name" type="text">
     <input v-model="email" class="mail" type="text">
     <input v-model="password" class="password" type="password">    
@@ -10,6 +11,7 @@
 <script>
 import store from '../store/store'
 import { mapActions } from 'vuex'
+
 export default {
   store,
   name: 'hello',
@@ -21,13 +23,11 @@ export default {
     }
   },
   mounted () {
-    this.getLatestNews()
   },
-  methods: { ...mapActions(['signUpUser', 'getLatestNews']),
+  methods: { ...mapActions(['signUpUser']),
     onSignup () {
       this.signUpUser({email: this.email, password: this.password, name: this.name})
     }
-
   }
 }
 </script>

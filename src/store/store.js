@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Firebase from 'Firebase'
+import when from 'when'
 import config from './firebase.config'
 
 Vue.use(Vuex)
@@ -38,9 +39,13 @@ const actions = {
       }, error => console.log(error))
   },
   getLatestNews: ({commit}) => {
-    Vue.http.get(latestNewsRequest)
-      .then(response => console.log(response)
-      )
+    let defer = when.defer()
+
+    Vue.http.get(latestNewsRequest).then(response => {
+      defer.resolve(response)
+    })
+
+    return defer.promise
   }
 
 }
