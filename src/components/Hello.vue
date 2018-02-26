@@ -21,9 +21,9 @@ export default {
     }
   },
   mounted () {
-    console.log(this)
+    this.getLatestNews()
   },
-  methods: { ...mapActions(['signUpUser']),
+  methods: { ...mapActions(['signUpUser', 'getLatestNews']),
     onSignup () {
       this.signUpUser({email: this.email, password: this.password, name: this.name})
     }
