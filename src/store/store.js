@@ -42,7 +42,7 @@ const actions = {
         user.updateProfile({
           displayName: name
         }).then((user) => {
-          console.log(user)
+          this.updateUser({user})
           defer.resolve(user)
         })
       }, error => console.log(error))
@@ -56,10 +56,18 @@ const actions = {
       defer.reject({message: 'Please fill every field.'})
       return defer.promise
     }
-
+    if (!navigator.onLine) {
+      if (localStorage.getItem('user')) {
+        let user = JSON.parse(localStorage.getItem('user'))
+        commit('updateUser', {user})
+        defer.resolve(user)
+      }
+    }
     Firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log(user)
+        let serialisedUser = JSON.stringify(user)
+        localStorage.setItem('user', serialisedUser)
+        commit('updateUser', {user})
         defer.resolve(user)
       }, (error) => {
         console.log(error)

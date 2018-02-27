@@ -30,14 +30,12 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted')
     if (this.articles.length > 0) {
       return false
     }
 
     this.getLatestNews().then(result => {
       let latestArticles = result.body.response.docs
-      console.log(latestArticles)
 
       for (let i = 0, l = latestArticles.length; i < l; i++) {
         let article = latestArticles[i]
