@@ -33,20 +33,39 @@ const mutations = {
 
 const actions = {
   signUpUser: ({commit}, {email, password, name}) => {
-    console.log(email, password, name)
+    console.log('sign up', email, password, name)
+    let defer = when.defer()
 
     Firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(user => {
         user.updateProfile({
           displayName: name
-        }).then(() => console.log('User name added'))
+        }).then((user) => {
+          console.log(user)
+          defer.resolve(user)
+        })
       }, error => console.log(error))
+
+    return defer.promise
   },
   signInUser: ({commit}, {email, password}) => {
+    console.log('sign in', email, password)
+    let defer = when.defer()
+    if (!email || !password) {
+      defer.reject({message: 'Please fill every field.'})
+      return defer.promise
+    }
+
     Firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log('User connected')
-      }, error => console.log(error))
+      .then((user) => {
+        console.log(user)
+        defer.resolve(user)
+      }, (error) => {
+        console.log(error)
+        defer.reject(error)
+      })
+
+    return defer.promise
   },
   getLatestNews: ({commit}) => {
     let defer = when.defer()
