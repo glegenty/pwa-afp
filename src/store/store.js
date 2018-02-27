@@ -3,10 +3,13 @@ import Vuex from 'vuex'
 import Firebase from 'Firebase'
 import when from 'when'
 import config from './firebase.config'
+// import Unsplash from 'unsplash-js'
 
 Vue.use(Vuex)
 Firebase.initializeApp(config)
-const latestNewsRequest = 'https://api.afp.com/v1/api/latest?lang=fr&access_token=66ab8e2f-02d2-4eda-a0a6-814db33b77c9'
+const AFPtoken = 'c278dcdc-5d6d-4244-ab02-b20cf60389f6'
+const latestNewsRequest = 'https://api.afp.com/v1/api/latest?lang=fr&access_token=' + AFPtoken
+
 const state = {
   user: null,
   latestNews: null

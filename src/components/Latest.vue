@@ -26,6 +26,8 @@ export default {
   },
   mounted () {
     this.getLatestNews().then(result => {
+      console.log(result)
+
       this.news = result.body.response.docs
       console.log(this.news)
 
