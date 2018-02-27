@@ -23,8 +23,9 @@ export default {
     }
   },
   mounted () {
+    this.getToken()
   },
-  methods: { ...mapActions(['signUpUser']),
+  methods: { ...mapActions(['signUpUser', 'getToken']),
     onSignup () {
       this.signUpUser({email: this.email, password: this.password, name: this.name})
     }
