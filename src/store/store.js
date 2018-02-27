@@ -12,14 +12,15 @@ Firebase.initializeApp(firebaseConfig)
 
 // const unsplash = new Unsplash(unspalshConfig)
 const AFPtoken = 'c278dcdc-5d6d-4244-ab02-b20cf60389f6'
-const lang = 'en'
+const lang = 'fr'
 const latestNewsRequest = 'https://api.afp.com/v1/api/latest?lang='
 const unsplashRequest = 'https://source.unsplash.com/1600x900/?'
 const state = {
   user: null,
   latestNews: null,
   accessToken: AFPtoken,
-  lang: lang
+  lang: lang,
+  articles: []
 }
 
 const mutations = {

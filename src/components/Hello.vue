@@ -26,6 +26,7 @@
 <script>
 import store from '../store/store'
 import { mapActions } from 'vuex'
+import router from '../router'
 
 export default {
   store,
@@ -50,7 +51,7 @@ export default {
         name: this.name
       }).then(user => {
         console.log('signed up', user)
-        window.location.href = '/#/latest'
+        router.push({ path: 'latest' })
       }).catch(error => {
         console.log('sign up error', error)
         this.error = error.message
@@ -62,7 +63,7 @@ export default {
         password: this.password
       }).then(user => {
         console.log('signed in', user)
-        window.location.href = '/#/latest'
+        router.push({ path: 'latest' })
       }).catch(error => {
         console.log('sign in error', error)
         this.error = error.message
