@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted () {
-    console.log(store)
+    // console.log(store)
   },
   methods: { ...mapActions(['signUpUser', 'signInUser']),
     onSignup () {

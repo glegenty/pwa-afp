@@ -27,10 +27,10 @@ export default {
   },
   mounted () {
     this.getLatestNews().then(result => {
-      console.log(result)
+      // console.log(result)
 
       this.news = result.body.response.docs
-      console.log(this.news)
+      // console.log(this.news)
 
       for (let i = 0, l = this.news.length; i < l; i++) {
         let article = this.news[i]
@@ -45,7 +45,7 @@ export default {
         if (article.bagItem) {
           article.img = article.bagItem[0].medias[0].href
         } else {
-          console.log(tags)
+          // console.log(tags)
           article.img = 'https://source.unsplash.com/1600x900/?' + tags
 
           // this.getUnsplashImage({tags}).then(res => {
