@@ -68,7 +68,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+
 .news {
   text-align: left;
 }
@@ -87,5 +88,8 @@ export default {
 .news__img {
   width: 100%;
 }
+
+.news-container
+    padding 0 20px
 
 </style>

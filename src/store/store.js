@@ -59,13 +59,6 @@ const actions = {
       defer.reject({message: 'Please fill every field.'})
       return defer.promise
     }
-    if (!navigator.onLine) {
-      if (localStorage.getItem('user')) {
-        let user = JSON.parse(localStorage.getItem('user'))
-        commit('updateUser', {user})
-        defer.resolve(user)
-      }
-    }
     Firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         let serialisedUser = JSON.stringify(user)
@@ -79,6 +72,19 @@ const actions = {
 
     return defer.promise
   },
+
+  signInOffline: ({commit}) => {
+    let defer = when.defer()
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user'))
+      commit('updateUser', {user})
+      defer.resolve(user)
+    } else {
+      defer.reject('No user in local storage')
+    }
+    return defer.promise
+  },
+
   getLatestNews: ({commit, dispatch, state}) => {
     let defer = when.defer()
     let request = latestNewsRequest + state.lang + '&access_token=' + state.accessToken

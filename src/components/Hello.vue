@@ -27,7 +27,7 @@
 import store from '../store/store'
 import { mapActions } from 'vuex'
 import router from '../router'
-
+import notificationManager from './notificationManager'
 export default {
   store,
   name: 'hello',
@@ -42,8 +42,15 @@ export default {
   },
   mounted () {
     // console.log(store)
+    notificationManager.start({requestSubscription: true})
+    // notificationManager.requestSubscription()
+    // notificationManager.test()
+
+    this.signInOffline().then(() => {
+      // console.log(this.$router.push({ path: 'latest' }))
+    })
   },
-  methods: { ...mapActions(['signUpUser', 'signInUser']),
+  methods: { ...mapActions(['signUpUser', 'signInUser', 'signInOffline']),
     onSignup () {
       this.signUpUser({
         email: this.email,
