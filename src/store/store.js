@@ -11,10 +11,29 @@ Vue.use(Vuex)
 Firebase.initializeApp(firebaseConfig)
 
 // const unsplash = new Unsplash(unspalshConfig)
-const AFPtoken = 'c278dcdc-5d6d-4244-ab02-b20cf60389f6'
+const AFPtoken = 'fc250ce0-c410-444c-82d4-39978e502425'
 const lang = 'fr'
 const latestNewsRequest = 'https://api.afp.com/v1/api/latest?lang='
+const searchNewsRequest = 'https://api.afp.com/v1/api/search?lang='
 const unsplashRequest = 'https://source.unsplash.com/1600x900/?'
+const searchNewsRequestOptions = {
+  'tz': 'Europa/Paris',
+  'dateRange': {
+    'from': 'now-30d',
+    'to': 'now'
+  },
+  'maxRows': 1,
+  'query': {
+    'and':
+     [
+       {
+         'name': 'news',
+         'contains': []
+       }
+     ]
+  }
+}
+
 const state = {
   user: null,
   latestNews: null,
@@ -80,6 +99,18 @@ const actions = {
     let defer = when.defer()
     let request = latestNewsRequest + state.lang + '&access_token=' + state.accessToken
     Vue.http.get(request).then(response => {
+      defer.resolve(response)
+    })
+    return defer.promise
+  },
+  getSearchedNews: ({commit}, {keywords}) => {
+    let defer = when.defer()
+    let requestURL = searchNewsRequest + state.lang + '&access_token=' + state.accessToken
+    let body = searchNewsRequestOptions
+
+    body.query.and[0].contains = keywords
+
+    Vue.http.post(requestURL, body).then(response => {
       defer.resolve(response)
     })
     return defer.promise
