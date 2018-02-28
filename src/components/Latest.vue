@@ -36,6 +36,7 @@ export default {
 
     this.getLatestNews().then(result => {
       let latestArticles = result.body.response.docs
+      console.log(result)
 
       for (let i = 0, l = latestArticles.length; i < l; i++) {
         let article = latestArticles[i]
@@ -62,12 +63,13 @@ export default {
         article.id = this.articles.length
         this.articles.push(article)
       }
-    })
+    }).catch(error => console.log(error))
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
+
 .news {
   text-align: left;
 }
@@ -86,5 +88,8 @@ export default {
 .news__img {
   width: 100%;
 }
+
+.news-container
+    padding 0 20px
 
 </style>
