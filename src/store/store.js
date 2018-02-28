@@ -21,7 +21,7 @@ const searchNewsRequestOptions = {
     'from': 'now-30d',
     'to': 'now'
   },
-  'maxRows': 1,
+  'maxRows': 10,
   'query': {
     'and':
      [
@@ -122,15 +122,15 @@ const actions = {
     let defer = when.defer()
     let requestURL = searchNewsRequest + state.lang + '&access_token=' + state.accessToken
     let body = searchNewsRequestOptions
-
     body.query.and[0].contains = keywords
 
     Vue.http.post(requestURL, body).then(response => {
       defer.resolve(response)
     }).catch(error => {
+      console.log(error)
       if (error.status === 401) {
         dispatch('getToken').then(token => {
-          dispatch('getLatestNews').then(response => defer.resolve(response))
+          dispatch('getSearchedNews', {keywords}).then(response => defer.resolve(response))
         })
       }
     })
@@ -170,6 +170,22 @@ const actions = {
     req.onerror = error => console.log(error)
     req.send()
     return defer.promise
+  },
+  getArticleData: ({commit}, {article}) => {
+    let description = ''
+    console.log(article, article.news.length)
+    for (let j = 0, n = article.news.length; j < n; j++) {
+      description += article.news[j]
+    }
+    article.excerpt = article.news[0]
+    article.description = description
+
+    if (article.bagItem) {
+      article.img = article.bagItem[0].medias[0].href
+    } else {
+      article.img = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Agence_France-Presse_Logo.svg/1200px-Agence_France-Presse_Logo.svg.png'
+    }
+    return article
   }
 
 }
