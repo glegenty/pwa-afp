@@ -2,19 +2,19 @@
   <section class="sign-container">
     <div class="signUp" v-if="showSignUp">
       <h1>Sign Up</h1>
-      <input class="signUp__name" placeholder="Name" v-model="name" type="text">
-      <input class="signUp__mail" placeholder="Email" v-model="email" type="text">
-      <input class="signUp__password" placeholder="Password" v-model="password" type="password">
-      <button class="button" @click="onSignup(email, password, name)" >SIGN UP</button>
+      <input class="signUp__name signUp__input" placeholder="Name" v-model="name" type="text">
+      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="text">
+      <input class="signUp__password signUp__input" placeholder="Password" v-model="password" type="password">
+      <button class="signUp__button" @click="onSignup(email, password, name)" >SIGN UP</button>
 
       <p class="signUp__link">Already have an account ? <button @click="toggleSign()">Sign in</button></p>
     </div>
 
     <div class="signIn" v-if="!showSignUp">
       <h1>Sign In</h1>
-      <input class="signUp__mail" placeholder="Email" v-model="email" type="text">
-      <input class="signUp__password" placeholder="Password" v-model="password" type="password">    
-      <button class="button" @click="onSignIn(email, password)" >SIGN IN</button>
+      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="text">
+      <input class="signUp__password signUp__input" placeholder="Password" v-model="password" type="password">    
+      <button class="signUp__button" @click="onSignIn(email, password)" >SIGN IN</button>
 
       <p class="signIn__link">Don't have an account ? <button @click="toggleSign()">Sign Up</button></p>
     </div>
@@ -85,10 +85,38 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 
 .error-message {
   color: red;
 }
+.signUp__input
+  display block
+  outline: none
+  background-color none
+  border none
+  width 80vw
+  height 40px
+  text-align center
+  border solid 1px black
+  border-radius 40px
+  box-sizing border-box
+  font-size 20px
+  margin 20px auto 0 
+  
+.signUp__button
+  border solid 1px black
+  border-radius 40px
+  border-radius 40px
+  width 80vw
+  height 40px
+  margin 20px auto 0 
+  font-size 20px
+  display block
+  
+   
+input:-webkit-autofill
+  // background-color none !important
+  -webkit-box-shadow: 0 0 0 30px white inset;
 
 </style>
