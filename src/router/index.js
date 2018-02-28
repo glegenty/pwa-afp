@@ -29,6 +29,11 @@ export default new Router({
       path: '/search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/article/:id',
+      name: 'Article',
+      component: Article
     }
   ]
 })
