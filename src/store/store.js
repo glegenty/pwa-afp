@@ -36,7 +36,7 @@ const searchNewsRequestOptions = {
 const state = {
   user: null,
   latestNews: null,
-  accessToken: 'c278dcdc-5d6d-4244-ab02-b20cf60389f6',
+  accessToken: localStorage.getItem('token'),
   lang: lang,
   articles: []
 }
@@ -165,6 +165,7 @@ const actions = {
       let token = JSON.parse(req.responseText)['access_token']
 
       commit('updateToken', {token})
+      localStorage.setItem('token', token)
       defer.resolve(token)
     }
     req.onerror = error => console.log(error)

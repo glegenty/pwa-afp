@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <span>Vue.js PWA</span>
+      <span>NEWS</span>
     </header>
     <main>
       <transition mode="out-in"
@@ -78,21 +78,31 @@ body, ul
 a
   text-decoration:none
   color: inherit
-#app
+main
   padding 0 20px
+  padding-top 50px
+  padding-bottom 20px
+  overflow-x hidden
 header
-//  &:before
-//     position absolute
-//     content: ''
-//     background-image: linear-gradient(180deg, #a1c4fd 0%, #c2e9fb 100%);
-//     height: 200px;
-//     width 100vw
-//     z-index -1
+  width 100vw
+  height 50px
+  background #FFF
+  position fixed
+  top 0
+  text-align center
+  letter-spacing: 10px;
+  // border-bottom: solid 1px black
+  box-shadow: 0px 2px 10px 5px rgba(0,0,0,0.1);
+  display flex
+  align-items center
+  justify-content center
+  z-index 10
 #app 
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-
+// .page-name
+//   position fixed
 
 </style>

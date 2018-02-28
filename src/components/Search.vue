@@ -9,17 +9,7 @@
     <div class="results" v-if="this.articles.length">
       <h2 class="results__title">Results for <i>{{ keywords }}</i></h2>
       <ul class="results__news">
-          <li class="news" v-for='article in this.articles'>
-            <!-- <div class="news__container" @click="openArticle(article.id)"> -->
-              
-            <img v-if="article.entity_video !== 'yes'" class="news__img" :src="article.img" alt="news img">
-            <video controls v-if="article.entity_video === 'yes'" class="news__img" :src="article.img"></video>
-
-              <router-link :to="{path: '/latest/'+article.id}"><h2 class="news__title">{{ article.title }}</h2></router-link>
-              <h2 class="news__excerpt">{{ article.excerpt }}</h2>
-              <!-- <h2 class="news__description">{{ article.description }}</h2> -->
-            <!-- </div> -->
-          </li>
+        <article-card v-for='article in this.articles' :article="article"/>
       </ul>
     </div>
   </div>
@@ -28,9 +18,13 @@
 <script>
 import store from '../store/store'
 import { mapActions } from 'vuex'
+import ArticleCard from './Card'
 
 export default {
   store,
+  components: {
+    ArticleCard
+  },
   data () {
     return {
       keywords: '',
