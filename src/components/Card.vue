@@ -3,7 +3,7 @@
     <!-- <div class="news__container" @click="openArticle(article.id)"> -->
 
       <img class="news__img" v-if="article.entity_video !== 'yes'" :src="article.img" alt="news img">
-      <video class="news__img" v-if="article.entity_video === 'yes'" :src="article.img" controls ></video>
+      <video class="news__img" v-if="article.entity_video === 'yes'" :src="article.img" controls playsinline ></video>
 
       <router-link :to="{path: '/latest/'+article.id}"><h2 class="news__title">{{ article.title }}</h2></router-link>
       <h2 class="news__excerpt">{{ article.excerpt }}</h2>
