@@ -5,7 +5,7 @@
       <img class="news__img" v-if="article.entity_video !== 'yes'" :src="article.img" alt="news img">
       <video class="news__img" v-if="article.entity_video === 'yes'" :src="article.img" controls playsinline ></video>
 
-      <router-link :to="{path: '/latest/'+article.id}"><h2 class="news__title">{{ article.title }}</h2></router-link>
+      <router-link :to="{path: '/article/'+article.id}"><h2 class="news__title">{{ article.title }}</h2></router-link>
       <h2 class="news__excerpt">{{ article.excerpt }}</h2>
       <!-- <h2 class="news__description">{{ article.description }}</h2> -->
     <!-- </div> -->
