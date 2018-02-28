@@ -11,14 +11,14 @@ Vue.use(Vuex)
 Firebase.initializeApp(firebaseConfig)
 
 // const unsplash = new Unsplash(unspalshConfig)
-const AFPtoken = 'c278dcdc-5d6d-4244-ab02-b20cf60389f6'
+// const AFPtoken = 'c278dcdc-5d6d-4244-ab02-b20cf60389f6'
 const lang = 'fr'
 const latestNewsRequest = 'https://api.afp.com/v1/api/latest?lang='
 const unsplashRequest = 'https://source.unsplash.com/1600x900/?'
 const state = {
   user: null,
   latestNews: null,
-  accessToken: AFPtoken,
+  accessToken: 'c278dcdc-5d6d-4244-ab02-b20cf60389f6',
   lang: lang,
   articles: []
 }
@@ -29,6 +29,9 @@ const mutations = {
   },
   updateLatestNews (state, {latestNews}) {
     state.latestNews = latestNews
+  },
+  updateToken (state, {token}) {
+    state.accessToken = token
   }
 }
 
@@ -76,11 +79,18 @@ const actions = {
 
     return defer.promise
   },
-  getLatestNews: ({commit}) => {
+  getLatestNews: ({commit, dispatch, state}) => {
     let defer = when.defer()
     let request = latestNewsRequest + state.lang + '&access_token=' + state.accessToken
+
     Vue.http.get(request).then(response => {
       defer.resolve(response)
+    }).catch(error => {
+      if (error.status === 401) {
+        dispatch('getToken').then(token => {
+          dispatch('getLatestNews').then(response => defer.resolve(response))
+        })
+      }
     })
     return defer.promise
   },
@@ -108,15 +118,16 @@ const actions = {
     req.open('POST', 'https://api.afp.com/oauth/token?username=Gobelins-GLegenty&password=28a2ac751876&grant_type=password', true)
     req.setRequestHeader('Accept', 'application/json')
     req.setRequestHeader('Authorization', 'Basic ' + btoa('Gobelins' + ':' + '5812dd69-9558-4b8a-a25a-378053ec825b'))
-    req.onreadystatechange = function () {
-      if (req.readyState !== 4) { return }
-      if (req.status !== 200) {
-        console.log('error')
-        return
-      }
-      console.log(JSON.parse(req.responseText))
+    let defer = when.defer()
+    req.onload = () => {
+      let token = JSON.parse(req.responseText)['access_token']
+
+      commit('updateToken', {token})
+      defer.resolve(token)
     }
+    req.onerror = error => console.log(error)
     req.send()
+    return defer.promise
   }
 
 }
