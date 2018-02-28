@@ -1,6 +1,6 @@
 <template>
   <div class="latest">
-    <h1>Latest News</h1>
+    <!-- <h3 class="page-name">NEWS</h3> -->
     <ul class="news-container">
         <li class="news" v-for='article in this.articles'>
           <!-- <div class="news__container" @click="openArticle(article.id)"> -->

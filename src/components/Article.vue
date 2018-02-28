@@ -35,5 +35,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+.article__image
+  height 300px
+  transform: translateX(-20px)
 </style>
