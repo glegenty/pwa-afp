@@ -47,7 +47,7 @@ export default {
     // notificationManager.test()
 
     this.signInOffline().then(() => {
-      // console.log(this.$router.push({ path: 'latest' }))
+      console.log(this.$router.push({ path: 'latest' }))
     })
   },
   methods: { ...mapActions(['signUpUser', 'signInUser', 'signInOffline']),
