@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <span>NEWS</span>
+      <span>AFP NEWS</span>
     </header>
     <main>
       <transition mode="out-in"
@@ -34,7 +34,7 @@ export default {
     // utilisée en combinaison avec du CSS
     enter: function (el, done) {
       console.log(el)
-      TweenMax.fromTo(el, 1, {autoAlpha: 0, x: -5}, {autoAlpha: 1, x: 0, ease: Power4.easeOut, onComplete: () => done()})
+      TweenMax.fromTo(el, 0.5, {autoAlpha: 0, x: -5}, {autoAlpha: 1, x: 0, ease: Power4.easeOut, onComplete: () => done()})
     },
     afterEnter: function (el) {
     // ...
@@ -54,7 +54,7 @@ export default {
     // utilisée en combinaison avec du CSS
     leave: function (el, done) {
       console.log(el)
-      TweenMax.to(el, 1, {autoAlpha: 0, x: -5, ease: Power4.easeOut, onComplete: () => done()})
+      TweenMax.to(el, 0.5, {autoAlpha: 0, x: -5, ease: Power4.easeOut, onComplete: () => done()})
 
       // done()
     },
