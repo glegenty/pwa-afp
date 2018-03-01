@@ -1,8 +1,8 @@
 <template>
   <div class="search">
     <h1>Search</h1>
-    <input class="search__input" v-model="keywords" placeholder="Type here" type="text" @focus="onFocus()">
-    <button class="button" @click="onSearch()">Search</button>
+    <input class="search__input" v-model="keywords" ref="search__input" placeholder="Type here to search" type="text" @keydown="onKeydown()">
+    <!-- <button class="button" @click="onSearch()">Search</button> -->
 
     <p class="error" v-if="this.error">No matching news, sorry ¯\_(ツ)_/¯</p>
     
@@ -27,33 +27,42 @@ export default {
   },
   data () {
     return {
-      keywords: '',
-      articles: [],
-      error: false
+      error: false,
+      keywords: store.state.search.keywords,
+      articles: store.state.search.articles
     }
   },
+  mounted () {
+    setTimeout(() => {
+      this.$refs.search__input.focus()
+    }, 500)
+  },
   methods: { ...mapActions(['getSearchedNews', 'getArticleData']),
-    onSearch () {
-      this.getSearchedNews({keywords: this.keywords}).then(results => {
-        console.log(results.body.response)
+    onKeydown () {
+      this.$nextTick(() => {
+        this.getSearchedNews({keywords: this.keywords}).then(results => {
+          if (results.body.response && results.body.response.docs) {
+            this.articles = []
+            store.state.search.articles = []
+            this.error = false
 
-        if (results.body.response && results.body.response.docs) {
-          this.error = false
-          let searchedArticles = results.body.response.docs
-          for (let i = 0, l = searchedArticles.length; i < l; i++) {
-            this.getArticleData({article: searchedArticles[i]}).then((result) => {
-              let article = result
-              article.id = this.articles.length
-              this.articles.push(article)
-            })
+            let searchedArticles = results.body.response.docs
+            for (let i = 0, l = searchedArticles.length; i < l; i++) {
+              this.getArticleData({article: searchedArticles[i]}).then((result) => {
+                let article = result
+                article.id = this.articles.length
+                this.articles.push(article)
+              })
+            }
+
+            store.state.search.articles = this.articles
+            store.state.search.keywords = this.keywords
+          } else {
+            this.error = true
+            this.articles = []
           }
-        } else {
-          this.error = true
-        }
+        })
       })
-    },
-    onFocus () {
-      this.articles = []
     }
   }
 }
@@ -61,5 +70,19 @@ export default {
 
 <style lang="stylus">
 .search__input
-  border-bottom: 1px solid black
+  -webkit-appearance none
+  border none
+  width calc(100% - 10px)
+  height: 40px
+  background #fefefe
+  text-transform uppercase
+  padding-left: 10px
+  border-radius: 2px
+  outline: none
+  border: 1px solid #1D1D1D
+  &:focus
+    outline: none
+    outline-offset: initial
+    color: #1483c7
+    border: 1px solid #1483c7
 </style>

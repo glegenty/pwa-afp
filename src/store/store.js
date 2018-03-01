@@ -38,7 +38,12 @@ const state = {
   latestNews: null,
   accessToken: localStorage.getItem('token'),
   lang: lang,
-  articles: []
+  articles: [],
+  search: {
+    keywords: '',
+    articles: []
+  },
+  previousRoute: null
 }
 
 const mutations = {
@@ -55,7 +60,6 @@ const mutations = {
 
 const actions = {
   signUpUser: ({commit}, {email, password, name}) => {
-    console.log('sign up', email, password, name)
     let defer = when.defer()
 
     Firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -71,7 +75,6 @@ const actions = {
     return defer.promise
   },
   signInUser: ({commit}, {email, password}) => {
-    console.log('sign in', email, password)
     let defer = when.defer()
     if (!email || !password) {
       defer.reject({message: 'Please fill every field.'})
@@ -174,7 +177,6 @@ const actions = {
   },
   getArticleData: ({commit}, {article}) => {
     let description = ''
-    console.log(article, article.news.length)
     for (let j = 0, n = article.news.length; j < n; j++) {
       description += article.news[j]
     }

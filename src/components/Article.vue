@@ -17,20 +17,34 @@ export default {
     return {
       currentId: this.$route.params.id,
       currentArticle: {},
-      articles: store.state.articles
+      previousRoute: null
     }
   },
   beforeRouteEnter (to, from, next) {
-    console.log('beforeRouteEnter', store.state.articles.length)
-    if (store.state.articles.length === 0) {
+    if (from.name === 'Latest' && store.state.articles.length === 0) {
       router.push({ path: 'latest' })
+    } if (from.name === 'Search' && store.state.search.articles.length === 0) {
+      router.push({ path: 'search' })
     } else {
+      store.state.previousRoute = from
       next()
     }
   },
   mounted () {
-    this.currentArticle = store.state.articles[this.$route.params.id]
     window.scrollTo(0, 0)
+
+    switch (store.state.previousRoute.name) {
+      case 'Latest':
+        this.currentArticle = store.state.articles[this.currentId]
+        break
+      case 'Search':
+        this.currentArticle = store.state.search.articles[this.currentId]
+        break
+      default:
+        console.error('Error reading current article, redirecting.')
+        router.push({ path: 'latest' })
+        break
+    }
   }
 }
 </script>
