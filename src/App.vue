@@ -7,7 +7,7 @@
         </svg>
       </span>
 
-      <span class="main-title">NEWS</span>
+      <span class="main-title"><router-link to="/latest">NEWS</router-link></span>
 
       <router-link v-if="isHome" to="/search" class="btn-search">
         <svg class="svg-icon" viewBox="0 0 20 20">
