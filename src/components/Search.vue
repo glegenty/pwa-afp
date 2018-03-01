@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <h1>Search</h1>
-    <input class="search__input" v-model="keywords" placeholder="Search" type="text" @focus="onFocus()">
+    <input class="search__input" v-model="keywords" placeholder="Type here" type="text" @focus="onFocus()">
     <button class="button" @click="onSearch()">Search</button>
 
     <p class="error" v-if="this.error">No matching news, sorry ¯\_(ツ)_/¯</p>
@@ -59,5 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+.search__input
+  border-bottom: 1px solid black
 </style>

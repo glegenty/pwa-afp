@@ -36,7 +36,13 @@ export default {
 </script>
 
 <style lang="stylus">
+.article
+  position relative
+
 .article__image
+  position relative
   height 300px
-  transform: translateX(-20px)
+  left: 50%
+  transform: translateX(-50%)
+  transform-origin: center center 
 </style>
