@@ -22,6 +22,7 @@ const searchNewsRequestOptions = {
     'to': 'now'
   },
   'maxRows': 10,
+  'lang': 'fr',
   'query': {
     'and':
      [
