@@ -3,7 +3,7 @@
     <div class="signUp" v-if="showSignUp">
       <h1>Sign Up</h1>
       <input class="signUp__name signUp__input" placeholder="Name" v-model="name" type="text">
-      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="text">
+      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="email">
       <input class="signUp__password signUp__input" placeholder="Password" v-model="password" type="password">
       <button class="signUp__button" @click="onSignup(email, password, name)" >SIGN UP</button>
 
@@ -12,7 +12,7 @@
 
     <div class="signIn" v-if="!showSignUp">
       <h1>Sign In</h1>
-      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="text">
+      <input class="signUp__mail signUp__input" placeholder="Email" v-model="email" type="email">
       <input class="signUp__password signUp__input" placeholder="Password" v-model="password" type="password">    
       <button class="signUp__button" @click="onSignIn(email, password)" >SIGN IN</button>
 
