@@ -31,6 +31,16 @@
         <router-view></router-view>
       </transition>
     </main>
+
+    <footer>
+      
+      <router-link v-if="isHome" to="/bluetooth" class="btn-bluetooth">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 53.972 53.972" xml:space="preserve"><path d="M40.533,14.387L26.146,0v24L14.853,12.707l-1.414,1.414l12.707,12.707V27L13.439,39.707l1.414,1.414l11.293-11.293v0.144v24
+        l14.387-15.585l-11.52-11.52L40.533,14.387z M28.146,4.828l9.613,9.613l-9.613,10.415V4.828z M28.146,48.856V28.828l9.613,9.613
+        L28.146,48.856z"/></svg>
+      </router-link>
+    </footer>
   </div>
 </template>
 
@@ -154,4 +164,17 @@ header
 .btn-search
   right 15px
 
+.btn-bluetooth
+  position absolute 
+  width 30px
+  height 30px
+  right: 15px
+  bottom: 15px
+  border-radius 50%
+  padding: 10px
+  background: white
+  border: 2px solid #1483c7
+  box-shadow: 0px 2px 5px 0px #cfcfcf
+  svg path
+    fill: #1483c7
 </style>

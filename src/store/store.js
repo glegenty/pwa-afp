@@ -190,6 +190,33 @@ const actions = {
       article.img = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Agence_France-Presse_Logo.svg/1200px-Agence_France-Presse_Logo.svg.png'
     }
     return article
+  },
+  connectBluetooth: ({commit}) => {
+    // Step 1: Scan for a device with 0xffe5 service
+    navigator.bluetooth.requestDevice({
+      filters: [{ services: [0xffe5] }]
+    })
+      .then((device) => {
+        // Step 2: Connect to it
+        return device.gatt.connect()
+      })
+      .then((server) => {
+        // Step 3: Get the Service
+        return server.getPrimaryService(0xffe5)
+      })
+      .then((service) => {
+        // Step 4: get the Characteristic
+        return service.getCharacteristic(0xffe9)
+      })
+      .then((characteristic) => {
+        // Step 5: Write to the characteristic
+        var data = new Uint8Array([0xbb, 0x25, 0x05, 0x44])
+        return characteristic.writeValue(data)
+      })
+      .catch((error) => {
+        // And of course: error handling!
+        console.error('Connection failed!', error)
+      })
   }
 
 }

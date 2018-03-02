@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Latest from '@/components/Latest'
 import Article from '@/components/Article'
 import Search from '@/components/Search'
+import Bluetooth from '@/components/Bluetooth'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/article/:id',
       name: 'Article',
       component: Article
+    },
+    {
+      path: '/bluetooth',
+      name: 'Bluetooth',
+      component: Bluetooth
     }
   ]
 })
