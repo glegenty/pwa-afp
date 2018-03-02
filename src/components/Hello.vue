@@ -16,10 +16,9 @@
       <input class="signUp__password signUp__input" placeholder="Password" v-model="password" type="password">    
       <button class="signUp__button" @click="onSignIn(email, password)" >SIGN IN</button>
 
+      <p class="signIn__link">Don't have an account ? <button @click="toggleSign()">Sign Up</button></p>
     </div>
     <p class="error-message">{{ error }}</p>
-    <p class="signIn__link">Don't have an account ? <button @click="toggleSign()">Sign Up</button></p>
-
   </section>
 </template>
 
@@ -104,7 +103,7 @@ export default {
   text-align center
   border solid 1px #1483c7
   color #1483c7
-  border-radius 40px
+  border-radius 3px
   box-sizing border-box
   font-size 20px
   margin 20px auto 0 
@@ -114,20 +113,34 @@ export default {
   background #1483c7
   color #FFF
   border-radius 40px
-  border-radius 40px
   width 80vw
   height 40px
   margin 20px auto 0 
   font-size 20px
   display block
   // background transparent
-.signIn__link
+.signIn__link, .signUp__link
   position absolute
   bottom 0
+  width: 100%
+  button 
+    -webkit-appearance none
+    appearance none
+    background #fff
+    border none
+    color: #1483c7
+    border-radius: 3px
+    border: 1px solid #1483c7
+    min-height: 20px
+    margin-left 10px
+    
    
 input:-webkit-autofill
   // background-color none !important
   -webkit-box-shadow: 0 0 0 30px white inset;
   -webkit-text-fill-color: #1483c7
+  color #1483c7
+
+::-webkit-input-placeholder
   color #1483c7
 </style>

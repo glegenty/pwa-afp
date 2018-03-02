@@ -165,7 +165,7 @@ header
   right 15px
 
 .btn-bluetooth
-  position absolute 
+  position fixed 
   width 30px
   height 30px
   right: 15px
@@ -174,7 +174,6 @@ header
   padding: 10px
   background: white
   border: 2px solid #1483c7
-  box-shadow: 0px 2px 5px 0px #cfcfcf
   svg path
     fill: #1483c7
 </style>
